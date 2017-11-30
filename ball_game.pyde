@@ -18,65 +18,80 @@ Create a 2-player clicking game.
 8. If a player reaches a score of 10, they win. Code this
 """
 
-ball_location_1 = PVector(100, 200)
-ball_location_2 = PVector(300, 200)
-score_1 = 0
-score_2 = 0
+width = 800
+height = 300
+
 
 def setup():
-    size(400, 400)
+    size(width, height)
+    
+ball_location_1 = PVector(width / 4, height / 2)
+ball_location_2 = PVector((width * 3) / 4, height / 2)
+score_1 = 0
+score_2 = 0
+ball_size = 50
+
+
     
 def draw():
     global score
+    
+    #game background
     fill(0, 255, 0)
-    rect(0, 0, 200, 400)
+    rect(0, 0, width / 2, height)
     fill(0, 0, 255)
-    rect(200, 0, 200, 400)
+    rect(width / 2, 0, width / 2, height)
     
-    ellipse(ball_location_1.x, ball_location_1.y, 100, 100)
-    fill(0, 255, 0)
-    ellipse(ball_location_2.x, ball_location_2.y, 100, 100)
+    if score_1 < 10 and score_2 < 10:
+        ellipse(ball_location_1.x, ball_location_1.y, ball_size, ball_size)
+        fill(0, 255, 0)
+        ellipse(ball_location_2.x, ball_location_2.y, ball_size, ball_size)
     
+    #printing the scores
     fill(0)
     textSize(15)
-    text('Score: ' + str(score_1), 130, 20)
-    text('Score: ' + str(score_2), 330, 20)
+    text('Score: ' + str(score_1), (width / 2) - 80, 20)
+    text('Score: ' + str(score_2), width - 80, 20)
     
     if score_2 >= 10:
         fill(0)
         textSize(32)
-        text('YOU WIN PLAYER 2', 70, 200)
+        text('YOU WIN PLAYER 2', (width / 2) - 130, height / 2)
         
     if score_1 >= 10:
         fill(0)
         textSize(32)
-        text('YOU WIN PLAYER 1', 70, 200)
+        text('YOU WIN PLAYER 1', (width / 2) - 130, height / 2)
     
 def mouseClicked():
     global score_1
+
     
-    # random_x = random(50, 150)
-    # random_y = random(50, 350)
-    # ball_location.x = random_x
-    # ball_location.y = random_y
+    #distance
+    a = mouseX - ball_location_1.x
+    b = mouseY - ball_location_1.y
     
-    if abs(mouseX - ball_location_1.x) < 50 and abs(mouseY - ball_location_1.y) < 50:
+    import math 
+    
+    distance = sqrt((a ** 2) + (b ** 2))
+    
+    
+    #click detection
+    
+    if distance <= ball_size / 2:
+   # if abs(mouseX - ball_location_1.x) < ball_size / 2 and abs(mouseY - ball_location_1.y) < ball_size / 2:
         score_1 += 1
-        ball_location_1.x = random(50, (width / 2) - 50)
-        ball_location_1.y = random(50, height - 50)
+        ball_location_1.x = random(ball_size / 2, (width / 2) - 50)
+        ball_location_1.y = random(ball_size / 2, height - 50)
 
     
     global score_2
+
     
-    # random_x = random(50, 150)
-    # random_y = random(50, 350)
-    # ball_location.x = random_x
-    # ball_location.y = random_y
-    
-    if abs(mouseX - ball_location_2.x) < 50 and abs(mouseY - ball_location_2.y) < 50:
+    if abs(mouseX - ball_location_2.x) < ball_size / 2 and abs(mouseY - ball_location_2.y) < ball_size / 2:
         score_2 += 1
-        ball_location_2.x = random(250, 150)
-        ball_location_2.y = random(250, 350)
+        ball_location_2.x = random((width / 2) + (ball_size / 2), width - (ball_size / 2))
+        ball_location_2.y = random(ball_size / 2, height - (ball_size / 2))
         
   
     
