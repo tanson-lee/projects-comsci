@@ -1,3 +1,4 @@
+
 """
 Create a 2-player clicking game.
 1. Draw an ellipse at a random location on the screen.
@@ -61,8 +62,8 @@ def mouseClicked():
     
     if abs(mouseX - ball_location_1.x) < 50 and abs(mouseY - ball_location_1.y) < 50:
         score_1 += 1
-        ball_location_1.x = random(50, 150)
-        ball_location_1.y = random(50, 350)
+        ball_location_1.x = random(50, (width / 2) - 50)
+        ball_location_1.y = random(50, height - 50)
 
     
     global score_2
