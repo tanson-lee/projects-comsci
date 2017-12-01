@@ -30,7 +30,7 @@ ball_location_1 = PVector(width / 4, height / 2)
 ball_location_2 = PVector((width * 3) / 4, height / 2)
 score_1 = 0
 score_2 = 0
-ball_size = 500
+ball_size = 100
 
 
     
