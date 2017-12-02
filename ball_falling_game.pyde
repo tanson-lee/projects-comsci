@@ -38,78 +38,97 @@ Steps:
 
 width = 400
 height = 400
-ball_x = 200
-ball_y = 0
-ball_size = 100
+ball_1_x = (width * 3) / 4
+ball_1_y = 0
+ball_1_size = 100
+ball_1_speed = 1
+ball_1_xspeed = 0
+
+ball_2_x = width / 4
+ball_2_y = 0
+ball_2_size = 100
+ball_2_speed = 1
+ball_2_xspeed = 0
+
+player_ball = 50
+score = -1
 seperating_line = 100
-ball_speed = 1
-score = 0
+ball_fallen = 0
 
 
 def setup():
     size(width, height)
     
 def draw():
-    global ball_x, ball_y, ball_speed, score
+    global ball_fallen
+    global ball_1_x, ball_1_y, ball_1_speed, ball_1_size, ball_1_xspeed
+    global ball_2_x, ball_2_y, ball_2_speed, ball_2_size, ball_2_xspeed
     background(255)
     
     #boarder
-    line(0, height - seperating_line, width, height - seperating_line)
+    line(0, height - player_ball, width, height - player_ball)
     
+    distance_1 = sqrt(abs((mouseX - ball_1_x) ** 2) + abs((height - (player_ball / 2)) - ball_1_y) ** 2)
+    distance_2 = sqrt(abs((mouseX - ball_2_x) ** 2) + abs((height - (player_ball / 2)) - ball_2_y) ** 2)
     
-    #falling ball
+    if distance_1 > (player_ball / 2) + (ball_1_size / 2) and distance_2 > (player_ball / 2) + (ball_2_size / 2):
+        
+        #1st falling ball
+        if ball_1_y >= height:
+            fill(0)
+            ball_1_x = random(ball_1_size / 2, width - (ball_1_size / 2))
+            ball_1_y = 0
+            ball_1_speed = random(1, 5)
+            ball_1_size = random(50, 150)
+            ball_2_xspeed = random(-1, 1)
+            ball_fallen += 1
+        ball_1_y += ball_1_speed
+        ball_1_x += ball_1_xspeed
+        ellipse(ball_1_x, ball_1_y, ball_1_size, ball_1_size) 
     
-    if ball_y >= height:
-        ball_x = random(ball_size / 2, width - (ball_size / 2))
-        ball_y = 0
-        ball_speed = random(0.5, 4)
-        score += 1
-    ball_y += ball_speed
-    ellipse(ball_x, ball_y, ball_size, ball_size)  
+        #2nd falling ball 
+        if ball_2_y >= height:
+            fill(0)
+            ball_2_x = random(ball_2_size / 2, width - (ball_2_size / 2))
+            ball_2_y = 0
+            ball_2_speed = random(1, 5)
+            ball_2_xspeed = random(-1, 1)
+            ball_2_size = random(50, 150)
+            ball_fallen += 1
+        ball_2_y += ball_2_speed
+        ball_2_x += ball_2_xspeed
+        ellipse(ball_2_x, ball_2_y, ball_2_size, ball_2_size) 
+    else:
+        textSize(32)
+        text('You Lose' + '\n' + 'SCORE:' + str(ball_fallen), (width / 2) - 100, height / 2)
+        
+    #printing score
+    fill(0)
+    textSize(15)
+    text('SCORE: ' + str(ball_fallen), width - 100, 20)
     
     #players ball
-    if mouseY - (ball_size / 4) > (height - seperating_line):
-        ellipse(mouseX, mouseY, 50, 50)
-    else:
-        fill(0)
-        textSize(15)
-        text('keep your ball below the line', (width / 2) - 100, height / 2)
+    # if mouseY - (player_ball / 2) > (height - seperating_line):
+    fill(0)
+    ellipse(mouseX, height - (player_ball / 2), 50, 50)
+    # else:
+    #     fill(0)
+    #     textSize(15)
+    #     text('keep your ball below the line', (width / 2) - 100, height / 2)
         
     #collison detection
     
+    import math
+    
+    #distance_1 = sqrt(((mouseX - ball_1_x) ** 2) + ((player_ball / 2) - ball_1_y) ** 2)
+    #distance_2 = sqrt(((mouseX - ball_2_x) ** 2) + ((player_ball / 2) - ball_2_y) ** 2)
+    
+    #if distance_1 > (player_ball / 2) + (ball_1_size / 2) and distance_2 > (player_ball / 2) + (ball_2_size / 2):
+        
     
     
-    distance = 
     
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
