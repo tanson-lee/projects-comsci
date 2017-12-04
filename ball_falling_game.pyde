@@ -78,7 +78,7 @@ def draw():
             fill(0)
             ball_1_x = random(ball_1_size / 2, width - (ball_1_size / 2))
             ball_1_y = 0
-            ball_1_speed = random(1, 5)
+            ball_1_speed = random(1, 6)
             ball_1_size = random(50, 150)
             ball_2_xspeed = random(-1, 1)
             ball_fallen += 1
@@ -91,16 +91,20 @@ def draw():
             fill(0)
             ball_2_x = random(ball_2_size / 2, width - (ball_2_size / 2))
             ball_2_y = 0
-            ball_2_speed = random(1, 5)
+            ball_2_speed = random(1, 6)
             ball_2_xspeed = random(-1, 1)
             ball_2_size = random(50, 150)
             ball_fallen += 1
         ball_2_y += ball_2_speed
         ball_2_x += ball_2_xspeed
-        ellipse(ball_2_x, ball_2_y, ball_2_size, ball_2_size) 
+        ellipse(ball_2_x, ball_2_y, ball_2_size, ball_2_size)
+        
+    #losing game    
     else:
         textSize(32)
-        text('You Lose' + '\n' + 'SCORE:' + str(ball_fallen), (width / 2) - 100, height / 2)
+        text('You Lose' , (width / 2) - 70 , height / 2)
+        #text('You Lose' + '\n' + 'SCORE:' + str(ball_fallen), (width / 2) - 100, height / 2)
+        ball_fallen = 0
         
     #printing score
     fill(0)
@@ -110,7 +114,7 @@ def draw():
     #players ball
     # if mouseY - (player_ball / 2) > (height - seperating_line):
     fill(0)
-    ellipse(mouseX, height - (player_ball / 2), 50, 50)
+    ellipse(mouseX, height - (player_ball / 2), player_ball, player_ball)
     # else:
     #     fill(0)
     #     textSize(15)
@@ -125,10 +129,4 @@ def draw():
     
     #if distance_1 > (player_ball / 2) + (ball_1_size / 2) and distance_2 > (player_ball / 2) + (ball_2_size / 2):
         
-    
-    
-    
-    
-    
-    
     
